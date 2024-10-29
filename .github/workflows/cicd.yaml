@@ -56,7 +56,7 @@ jobs:
       - name: build and push docker image to ECR
         env:
           IMAGE_TAG: ${{github.run_id}}
-        run:
+        run: |
           docker build -t python-web-app:${IMAGE_TAG} .
           docker tag python-web-app:${IMAGE_TAG} ${{ secrets.ECR_REPOSITORY }}:${IMAGE_TAG}
           docker push ${{ secrets.ECR_REPOSITORY }}:${IMAGE_TAG}
