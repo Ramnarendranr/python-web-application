@@ -29,10 +29,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: test
-        run: 
-
-
   code-quality:
     runs-on: ubuntu-latest
 
@@ -96,7 +92,7 @@ jobs:
       - name: checkout repository
         uses: action/checkout@v4
         with:
-          token:
+          token: ${{ secrets.TOKEN }}
 
       - name: update tag in helm chart
         run: |
