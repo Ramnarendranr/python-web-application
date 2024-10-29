@@ -24,12 +24,15 @@ RUN echo "ServerName localhost" >> /etc/apache2/httpd.conf && \
     echo "LoadModule proxy_http_module modules/mod_proxy_http.so" >> /etc/apache2/httpd.conf && \
     echo "<VirtualHost *:80>" >> /etc/apache2/httpd.conf && \
     echo "    ProxyPreserveHost On" >> /etc/apache2/httpd.conf && \
-    echo "    ProxyPass / http://127.0.0.1:8080/" >> /etc/apache2/httpd.conf && \
-    echo "    ProxyPassReverse / http://127.0.0.1:8080/" >> /etc/apache2/httpd.conf && \
+    echo "    ProxyPass / http://127.0.0.1:5001/" >> /etc/apache2/httpd.conf && \
+    echo "    ProxyPassReverse / http://127.0.0.1:5001/" >> /etc/apache2/httpd.conf && \
     echo "</VirtualHost>" >> /etc/apache2/httpd.conf
 
 # Expose port 80 for Apache
 EXPOSE 80
 
+# Set environment variable for Flask app
+ENV FLASK_APP=app.py
+
 # Start Flask and Apache in the background
-CMD ["sh", "-c", "flask run --host=0.0.0.0 --port=8080 & httpd -D FOREGROUND"]
+CMD ["sh", "-c", "flask run --host=0.0.0.0 --port=5001 & httpd -D FOREGROUND"]

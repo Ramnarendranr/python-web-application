@@ -32,5 +32,8 @@ spec:
               port: 80
             initialDelaySeconds: 15
             periodSeconds: 5
+          env:
+            - name: RANDOM_COLOR_LAMBDA_URL
+              value: {{ .Values.lambda.url }}
       imagePullSecrets:
         - name: ecr-image-pull-secret
