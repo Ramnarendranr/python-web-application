@@ -33,6 +33,8 @@ EXPOSE 80
 
 # Set environment variable for Flask app
 ENV FLASK_APP=app.py
+# Set environment variable for the API endpoint
+ENV RANDOM_COLOR_LAMBDA_URL="https://lbehfpf74l.execute-api.us-east-1.amazonaws.com/dev/random-color"
 
 # Start Flask and Apache in the background
 CMD ["sh", "-c", "flask run --host=0.0.0.0 --port=5001 & httpd -D FOREGROUND"]
