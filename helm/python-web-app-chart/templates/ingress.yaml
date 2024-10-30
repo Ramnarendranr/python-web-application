@@ -1,21 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: python-web-app-ingress
+  name: python-flask-web-app
+  namespace: python-flask-web-app
   annotations:
-    kubernetes.io/ingress.class: "alb"  # This is for AWS Load Balancer
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    kubernetes.io/ingress.class: alb  # Specify the ALB ingress class
+    alb.ingress.kubernetes.io/scheme: internet-facing  # Change to internal if needed
+    alb.ingress.kubernetes.io/target-type: ip  # Set target type to ip for ALB
 spec:
   rules:
-    - host: pythonwebapp.local
-      http:
+    - http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: python-web-app
-                port:
-                  number: 80
-
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: python-flask-web-app  # Name of your service
+              port:
+                number: 80  # Port exposed by your service

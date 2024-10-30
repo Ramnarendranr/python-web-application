@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: python-web-app
-  labels:
-    app: python-web-app
+  name: python-flask-web-app
+  namespace: python-flask-web-app
 spec:
-  type: ClusterIP
+  type: ClusterIP  # This can be NodePort or LoadBalancer if you want external access
   ports:
-    - port: 80
-      targetPort: 80  # Ensure this matches the container port
+    - port: 80      # Port to expose the service
+      targetPort: 80  # Port on which your app is running
   selector:
-    app: python-web-app
+    app: python-flask-web-app
+

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-flask-web-app
+  namespace: python-flask-web-app
+spec:
+  replicas: 3  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: python-flask-web-app
+  template:
+    metadata:
+      labels:
+        app: python-flask-web-app
+    spec:
+      containers:
+      - name: python-flask-web-app
+        image: 864406680995.dkr.ecr.us-east-1.amazonaws.com/python-web-application:11584008103
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: ecr-registry-secret
